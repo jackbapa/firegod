@@ -21,3 +21,6 @@ def go_managed():
         os.system("sudo " + "iwconfig" + " " + interface + " " + "mode" + " " + "-managed")
         os.system("sudo " + "ifconfig" + " " + interface + " " + "up")
         pass
+
+if __name__ == "__main__":
+    go_monitor_airmion()
