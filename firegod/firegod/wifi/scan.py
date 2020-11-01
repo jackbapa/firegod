@@ -23,6 +23,7 @@ class wifi_pywifi():
         """
 
         wp = self.wifi.interfaces()[num]
+        print(wp.name())
         wp.scan()
         resulut = wp.scan_results()
         wifi_list = []
@@ -59,6 +60,17 @@ class wifi_scapy():
         if sys.platform == "win32":
             raise OSError("only support liunx, please use wifi_pywifi")
         sniff(iface=interface, prn=self.call_back)
+
+
+# 获取目标 ap 的 mac 地址
+def get_target_mac(ap_name):
+    gun = wifi_pywifi()
+    mylist = gun.wifi_scan_pywifi(0)
+    for x in mylist:
+        if x['ssid'] == ap_name:
+            return x["mac"]
+
+
 
 if __name__ == "__main__":
     firegod_wifi.go_monitor_airmion()

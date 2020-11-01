@@ -43,7 +43,7 @@ class facke_ap():
         def send_():
             nonlocal iface
             while 1:
-                sendp(self.fake_beacom, iface=iface ,inter=0.01, count=5)
+                sendp(self.fake_beacom, iface=iface ,inter=0.001, count=5)
 
         self.send_th = mp.Process(target=send_)
         self.send_th.start()
@@ -56,7 +56,7 @@ class facke_ap():
             sendau = RadioTap() / \
                      Dot11(addr1=pk[Dot11].addr2, addr2="00:0f:11:83:09:39", addr3="00:0f:11:83:09:39")/ \
                      Dot11Auth(algo=0,seqnum=2,status=0)
-            sendp(sendau,iface="wlan1mon",count=2,inter=0.01)
+            sendp(sendau,iface="wlan1mon",count=2,inter=0.001)
 
         if pk.haslayer(Dot11AssoReq):
             print("454545" * 20)
@@ -66,7 +66,7 @@ class facke_ap():
                      Dot11AssoResp(AID = 2)/ \
                      Dot11Elt(ID="Rates", info="\x82\x84\x0b\x16")/ \
                      Dot11Elt(ID="ESRates", info="\x82\x84\x0b\x16")
-            sendp(sendsso,iface="wlan1mon", count = 5,inter=0.1)
+            sendp(sendsso,iface="wlan1mon", count = 5,inter=0.001)
 
         if pk.haslayer(Dot11ProbeReq):
             # print(pk.show())
@@ -82,7 +82,7 @@ class facke_ap():
                          Dot11Elt(ID="Rates", info="\x82\x84\x0b\x16" )/ \
                          Dot11Elt(ID="DSset", info="\x01") / \
                          Dot11Elt(ID="ESRates", info="\x82\x84\x0b\x16")
-                sendp(pksend, iface="wlan1mon",count=5,inter=0.01)
+                sendp(pksend, iface="wlan1mon",count=5,inter=0.001)
 
 
 
